@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumbai - MahaExplore</title>
+    <style>
+        /* Reset and global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: fixed;
+            z-index: 2;
+            background: transparent;
+        }
+        .navbar .logo {
+            font-size: 35px;
+            color: #f4d03f;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            padding: 5px 10px;
+            border: 2px solid white;
+            border-radius: 20px;
+            text-transform: capitalize;
+            transition: 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            color: black;
+            background: white;
+        }
+
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 15px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.navbar .logo a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.nav-links a:hover {
+    color: #f4d03f;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 2px solid white;
+    cursor: pointer;
+    text-transform: capitalize;
+    border-radius: 20px;
+}
+
+.dropbtn:hover {
+    background-color: white;
+    color: black;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    padding-top: 5px;
+    background-color: transparent;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 10px;
+    max-height: 150px;  /* Adjust this to show 3 or 4 items (approx. 40px per item) */
+    overflow-y: auto;  /* Enable vertical scrolling */
+}
+
+/* Hide the scrollbar but keep the scrolling functionality */
+.dropdown-content::-webkit-scrollbar {
+    display: none;  /* Hide scrollbar in Webkit browsers */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 20px 12px;
+    text-decoration: none;
+    display: block;
+    text-transform: capitalize;
+    border-bottom: 1px solid #ddd;
+    margin-top: 5px;
+}
+
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            object-fit: contain;
+            background:url('https://s7ap1.scene7.com/is/image/incredibleindia/1-gawligarh-fort-amravati-maharashtra-city-hero?qlt=82&ts=1726674981780')no-repeat center center/cover;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 0;
+        }
+        .hero .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+        .hero .content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        .hero .content p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .about h2 {
+            font-size: 2.5rem;
+            color: #f4d03f;
+            margin-bottom: 20px;
+        }
+        .about p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        /* Tourist Attractions Section */
+        .attractions {
+            padding: 60px 20px;
+            background-color: #000000;
+        }
+        .attractions h2 {
+            font-size: 2.5rem;
+            color: #f4d03f;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .attractions .card-container {
+            overflow-x: auto;
+            padding-bottom: 20px;
+            display: flex;
+            /*flex-wrap: wrap;*/
+           /* justify-content: center;*/
+            gap: 20px;
+        }
+        .attractions .card-container::-webkit-scrollbar{
+            display: none;
+        }
+        .attractions .card {
+            background: #222;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 300px;
+            height: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+        }
+        .attractions .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+        }
+        .attractions .card img {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+        }
+        .attractions .card h3 {
+            font-size: 1.5rem;
+            color: #f4d03f;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .attractions .card p {
+            font-size: 1rem;
+            color: #ddd;
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        /* Smooth animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    /* All your existing CSS styles here */
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .navbar .nav-links {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hero .content h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero .content p {
+            font-size: 1rem;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+        }
+
+        .attractions .card-container {
+            flex-direction: column;
+        }
+
+        .attractions .card {
+            width: 90%;
+            margin: 0 auto;
+            height: auto;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .navbar .logo {
+            font-size: 1.5rem;
+        }
+
+        .navbar .nav-links a {
+            font-size: 0.9rem;
+        }
+
+        .hero .content h1 {
+            font-size: 2rem;
+        }
+
+        .hero .content p {
+            font-size: 0.9rem;
+        }
+
+        .about h2 {
+            font-size: 1.8rem;
+        }
+
+        .attractions h2 {
+            font-size: 2rem;
+        }
+
+        .attractions .card {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .weather {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color:#f0ececf5;
+            padding: 10px;
+            border-radius: 25px;
+            font-size: 1.0rem;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar" id="navbar">
+        <div class="logo">MahaExplore</div>
+        <div class="nav-links">
+            <a href="main.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">Districts</button>
+                    <div class="dropdown-content">
+                        <a href="pune.html">pune</a>
+                        <a href="mumbai.html">mumbai</a>
+                        <a href="sangli.html">sangli</a>
+                        <a href="solapur.html">solapur</a>
+                        <a href="Nagpur.html">nagpur</a>
+                        <a href="ahamednagar.html">ahamednagar</a>
+                        <a href="Bhandara.html">Bhandara</a>
+                        <a href="nandurbar.html">nandurbar</a>
+                        <a href="sindhudurga.html">sindhudurga</a>
+                        <a href="palghar.html">palghar</a>
+                        <a href="dhule.html">dhule</a>
+                        <a href="nashik.html">nashik</a>
+                        <a href="aurangabad.html">aurangabad</a>
+                        <a href="gadchiroli.html">gadchiroli</a>
+                        <a href="warda.html">warda</a>
+                        <a href="thane.html">thane</a>
+                        <a href="dhule.html">dhule</a>
+                        <a href="kolhapur.html">kolhapur</a>
+                        <a href="gondia.html">gondiae</a>
+                        <a href="Akola.html">Akola</a>
+                        <a href="Amaravati.html">Amaravati</a>
+                        <a href="beed.html">beed</a>
+                        <a href="Buldhana.html">Buldhana</a>
+                        <a href="hingoli.html">hingoli</a>
+                        <a href="jalna.html">jalna</a>
+                        <a href="latur.html">latur</a>
+                        <a href="nanded.html">nanded</a>
+                        <a href="parbhani.html">parbhani</a>
+                        <a href="raigad.html">raigad</a>
+                        <a href="Ratnagiri.html">Ratnagiri</a>
+                        <a href="satara.html">satara</a>
+                        <a href="usamanabad.html">usamanabad</a>
+                        <a href="washim.html">washim</a>
+                        <a href="Yavatmal.html">Yavatmal</a>
+                    </div>
+            </div>
+            <a href="attractions.html">Attractions</a>
+            <a href="cuisine.html">Cuisine</a>
+            <a href="contact.html">contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section ;k-->
+    <div class="hero">
+        <div class="content">
+            <h1>Welcome to Amaravati</h1>
+            <p>Explore Amravati for its rich history, scenic beauty, and peaceful temples.</p>
+        </div>
+        <div id="weather" class="weather">
+            Loading Weather...
+        </div>
+    </div>
+<!--attraction-->
+    <div class="attractions">
+        <h2>Must-Visit Attractions</h2>
+        <div class="card-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipO9YfkIzjHrUkZ5n5Lk0etRpbfp7Yqcm724OUu4=s294-w294-h220-k-no" alt="Melghat Tiger Reserve">
+                <h3>Melghat Tiger Reserve</h3>
+                <p>A tranquil temple by the serene Padmatirtha Lake, offering spiritual solace and a beautiful natural setting.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/3b/bd/ed/images-largejpg.jpg?w=1200&h=-1&s=1" alt="Amba DeviTemple">
+                <h3>Amba Devi Temple</h3>
+                <p>A divine Jain temple known for its peaceful ambiance and spiritual significance.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Gawilgarh_Fort_-_C.SHELARE.jpg" alt="Gawilgarh Fort">
+                <h3>Gawilgarh Fort</h3>
+                <p>A historical temple showcasing the distinct Hemadpanthi architectural style.</p>
+            </div>
+            <div class="card">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipOOip2Avfc5h-QID1rTORNUOZcpS39ssJjTZibn=w675-h390-n-k-no" alt="Iskon Temple">
+                <h3>Iskon Temple</h3>
+                <p>A popular pilgrimage site offering scenic views and a tranquil environment.</p>
+            </div>
+            <div class="card">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipPJejp2kBJbwKbC8i00l0tKZ5JlEQKysx_R5b85=w675-h390-n-k-no" alt="Wadali Talav">
+                <h3>Wadali Talav</h3>
+                <p>A sacred temple dedicated to Lord Balaji, offering spiritual tranquility and divine blessings.</p>
+            </div>
+            <div class="card">
+                <img src="https://app.vivantainfinity.com/assets/source/blogs/famous-places-in-amravati-to-visit-this-2022/bamboo-garden-Tourist-Place-In-Amravati.jpg" alt="Bamboo Garden">
+                <h3>Bamboo Garden</h3>
+                <p>A peaceful retreat surrounded by scenic landscapes, perfect for nature lovers and a relaxing day out.</p>
+            </div>
+        </div>
+    </div>
+    <div class="about">
+        <h2>About Amaravati</h2>
+        <p>
+            Amravati, a vibrant city in Maharashtra, is known for its rich cultural heritage, historical landmarks, and scenic beauty. From the serene Melghat Tiger Reserve to the spiritual Amba Devi Temple, the city offers a perfect blend of nature, history, and spirituality. With its lush gardens, historic forts, and tranquil lakes, Amravati is a must-visit destination for travelers seeking both adventure and peace.
+        </p>
+    </div>
+
+    <script>
+        async function getWeather() {
+            const apiKey = '8f833e2f0044bcd69b9bf91641915165';
+            const city = 'Amaravati';
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.cod === 200) {
+                    const temperature = data.main.temp;
+                    const description = data.weather[0].description;
+                    const weatherElement = document.getElementById('weather');
+                    weatherElement.innerHTML = `${temperature}°C, ${description}`;
+                } else {
+                    document.getElementById('weather').innerHTML = 'Weather data not available';
+                }
+            } catch (error) {
+                console.error("Error fetching weather data: ", error);
+                document.getElementById('weather').innerHTML = 'Error fetching weather data';
+            }
+        }
+
+         // Call the function to fetch weather when the page loads
+         window.onload = getWeather;
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

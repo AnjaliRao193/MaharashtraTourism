@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumbai - MahaExplore</title>
+    <style>
+        /* Reset and global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: fixed;
+            z-index: 2;
+            background: transparent;
+        }
+        .navbar .logo {
+            font-size: 35px;
+            color: #f4d03f;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            padding: 5px 10px;
+            border: 2px solid white;
+            border-radius: 20px;
+            text-transform: capitalize;
+            transition: 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            color: black;
+            background: white;
+        }
+
+        .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 15px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.navbar .logo a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.nav-links a:hover {
+    color: #f4d03f;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 2px solid white;
+    cursor: pointer;
+    text-transform: capitalize;
+    border-radius: 20px;
+}
+
+.dropbtn:hover {
+    background-color: white;
+    color: black;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    padding-top: 5px;
+    background-color: transparent;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 10px;
+    max-height: 150px;  /* Adjust this to show 3 or 4 items (approx. 40px per item) */
+    overflow-y: auto;  /* Enable vertical scrolling */
+}
+
+/* Hide the scrollbar but keep the scrolling functionality */
+.dropdown-content::-webkit-scrollbar {
+    display: none;  /* Hide scrollbar in Webkit browsers */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 20px 12px;
+    text-decoration: none;
+    display: block;
+    text-transform: capitalize;
+    border-bottom: 1px solid #ddd;
+    margin-top: 5px;
+}
+
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            object-fit: contain;
+            background:url('https://tripxl.com/blog/wp-content/uploads/2024/10/Toranmal-2.jpg')no-repeat center center/cover;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 0;
+        }
+        .hero .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+        .hero .content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        .hero .content p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* About Section */
+        .about {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .about h2 {
+            font-size: 2.5rem;
+            color: #f4d03f;
+            margin-bottom: 20px;
+        }
+        .about p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        /* Tourist Attractions Section */
+        .attractions {
+            padding: 60px 20px;
+            background-color: #000000;
+        }
+        .attractions h2 {
+            font-size: 2.5rem;
+            color: #f4d03f;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .attractions .card-container {
+            overflow-x: auto;
+            padding-bottom: 20px;
+            display: flex;
+            /*flex-wrap: wrap;*/
+           /* justify-content: center;*/
+            gap: 20px;
+        }
+        .attractions .card-container::-webkit-scrollbar{
+            display: none;
+        }
+        .attractions .card {
+            background: #222;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 300px;
+            height: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+        }
+        .attractions .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+        }
+        .attractions .card img {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+        }
+        .attractions .card h3 {
+            font-size: 1.5rem;
+            color: #f4d03f;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .attractions .card p {
+            font-size: 1rem;
+            color: #ddd;
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        /* Smooth animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    /* All your existing CSS styles here */
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .navbar .nav-links {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hero .content h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero .content p {
+            font-size: 1rem;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+        }
+
+        .attractions .card-container {
+            flex-direction: column;
+        }
+
+        .attractions .card {
+            width: 90%;
+            margin: 0 auto;
+            height: auto;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .navbar .logo {
+            font-size: 1.5rem;
+        }
+
+        .navbar .nav-links a {
+            font-size: 0.9rem;
+        }
+
+        .hero .content h1 {
+            font-size: 2rem;
+        }
+
+        .hero .content p {
+            font-size: 0.9rem;
+        }
+
+        .about h2 {
+            font-size: 1.8rem;
+        }
+
+        .attractions h2 {
+            font-size: 2rem;
+        }
+
+        .attractions .card {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .weather {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color:#f0ececf5;
+            padding: 10px;
+            border-radius: 25px;
+            font-size: 1.0rem;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar" id="navbar">
+        <div class="logo">MahaExplore</div>
+        <div class="nav-links">
+            <a href="main.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">Districts</button>
+                    <div class="dropdown-content">
+                        <a href="pune.html">pune</a>
+                        <a href="mumbai.html">mumbai</a>
+                        <a href="sangli.html">sangli</a>
+                        <a href="solapur.html">solapur</a>
+                        <a href="Nagpur.html">nagpur</a>
+                        <a href="ahamednagar.html">ahamednagar</a>
+                        <a href="Bhandara.html">Bhandara</a>
+                        <a href="nandurbar.html">nandurbar</a>
+                        <a href="sindhudurga.html">sindhudurga</a>
+                        <a href="palghar.html">palghar</a>
+                        <a href="dhule.html">dhule</a>
+                        <a href="nashik.html">nashik</a>
+                        <a href="aurangabad.html">aurangabad</a>
+                        <a href="gadchiroli.html">gadchiroli</a>
+                        <a href="warda.html">warda</a>
+                        <a href="thane.html">thane</a>
+                        <a href="dhule.html">dhule</a>
+                        <a href="kolhapur.html">kolhapur</a>
+                        <a href="gondia.html">gondiae</a>
+                        <a href="Akola.html">Akola</a>
+                        <a href="Amaravati.html">Amaravati</a>
+                        <a href="beed.html">beed</a>
+                        <a href="Buldhana.html">Buldhana</a>
+                        <a href="hingoli.html">hingoli</a>
+                        <a href="jalna.html">jalna</a>
+                        <a href="latur.html">latur</a>
+                        <a href="nanded.html">nanded</a>
+                        <a href="parbhani.html">parbhani</a>
+                        <a href="raigad.html">raigad</a>
+                        <a href="Ratnagiri.html">Ratnagiri</a>
+                        <a href="satara.html">satara</a>
+                        <a href="usamanabad.html">usamanabad</a>
+                        <a href="washim.html">washim</a>
+                        <a href="Yavatmal.html">Yavatmal</a>
+                    </div>
+            </div>
+            <a href="attractions.html">Attractions</a>
+            <a href="cuisine.html">Cuisine</a>
+            <a href="contact.html">contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section ;k-->
+    <div class="hero">
+        <div class="content">
+            <h1>Welcome to Akola</h1>
+            <p>Explore Akola for its vibrant culture, historic landmarks, and scenic beauty, offering a perfect mix of tradition and nature.</p>
+        </div>
+        <div id="weather" class="weather">
+            Loading Weather...
+        </div>
+    </div>
+<!--attraction-->
+    <div class="attractions">
+        <h2>Must-Visit Attractions</h2>
+        <div class="card-container"data-location="Akola">
+            <!-- Card 1 -->
+            <div class="card">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipPNRKaRE4t6MA8BEyEclx6Xwtjzie8DpT-L91Tp=w675-h390-n-k-no" alt="Akola Fort">
+                <h3>Akola Fort</h3>
+                <p> A historic fort with panoramic views and peaceful surroundings.</p>
+
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <img src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcSIg3ClwY4-ewh5NbG9mKInEDPDjLrOK-KQU0yh4BHYwIuvZ79tGHjvkkCnhzkyljk5_yFGN5wXol9Sp6MqK-cEaM3-nR7a9WgymhrbwA" alt="Narnala fort">
+                <h3>Narnala Fort</h3>
+                <p>A hilltop fort offering trekking and stunning vistas.</p>
+                
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <img src="https://hblimg.mmtcdn.com/content/hubble/img/ttd_images/mmt/activities/m_Akola_Kapshi_lake_1_l_424_640.jpg?im=Resize=(288,162)" alt="Kapshi Lake">
+                <h3>Kapshi Lake</h3>
+                <p>A serene lake perfect for relaxation and photography.</p>
+                
+            </div>
+            <div class="card">
+                <img src="https://hoteljasnagra.com/wp-content/uploads/2018/05/Katepurna-2.jpg" alt="Katepurna Wildlife Sanctuary">
+                <h3>Katepurna Wildlife Sanctuary</h3>
+                <p>A wildlife sanctuary known for its rich biodiversity.</p>
+                
+            </div>
+            <div class="card">
+                <img src="https://content.jdmagicbox.com/comp/akola/i6/9999px724.x724.180302014157.x8i6/catalogue/om-shri-baara-jyotirlinga-shiv-mandir-akola-city-akola-temples-sd4fma7k0g.jpg" alt="Om Shri Baara Jyotirlinga Shiv Mandir">
+                <h3>Om Shri Baara Jyotirlinga Shiv Mandir</h3>
+                <p>A spiritual temple dedicated to Lord Shiva.</p>
+                
+            </div>
+            <div class="card">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipP9x2NuqH20enlQ5Wr0RTtC7YPZVxEEBPlMJZ97=w675-h390-n-k-no" alt="Salasar Balaji Temple">
+                <h3>Salasar Balaji Temple</h3>
+                <p>A peaceful temple devoted to Lord Balaji.</p>
+                
+            </div>
+        </div>
+    </div>
+    <div class="about">
+        <h2>About Akola</h2>
+        <p>
+            Akola, a vibrant city in Maharashtra, is known for its rich history, cultural heritage, and natural beauty. From the historic Balapur Fort to the serene Katepurna Sanctuary, Akola offers a perfect blend of adventure, spirituality, and tranquility. With its ancient temples, scenic lakes, and lush landscapes, it's an ideal destination for both history buffs and nature lovers.
+        </p>
+    </div>
+
+    <script>
+      async function getWeather() {
+            const apiKey = '8f833e2f0044bcd69b9bf91641915165';
+            const city = 'Akola';
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.cod === 200) {
+                    const temperature = data.main.temp;
+                    const description = data.weather[0].description;
+                    const weatherElement = document.getElementById('weather');
+                    weatherElement.innerHTML = `${temperature}°C, ${description}`;
+                } else {
+                    document.getElementById('weather').innerHTML = 'Weather data not available';
+                }
+            } catch (error) {
+                console.error("Error fetching weather data: ", error);
+                document.getElementById('weather').innerHTML = 'Error fetching weather data';
+            }
+        }
+
+         // Call the function to fetch weather when the page loads
+         window.onload = getWeather;
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

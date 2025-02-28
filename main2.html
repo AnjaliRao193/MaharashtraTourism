@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MahaExplore</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        html{
+            scroll-behavior: smooth;
+        }
+        body {
+            overflow-x: hidden;
+            background-color: black;
+            color: white;
+        }
+        .navbar {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: fixed;
+            z-index: 2;
+            background: transparent;
+        }
+        .navbar .logo {
+            font-size: 35px;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            padding: 5px 10px;
+            border: 2px solid white;
+            border-radius: 20px;
+            text-transform: capitalize;
+            transition: 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            color: black;
+            background: white;
+        }
+        .banner {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .banner img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            animation: zoom 10s infinite alternate;
+        }
+        @keyframes zoom {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.1);
+            }
+        }
+        .content {
+            text-align: center;
+            z-index: 1;
+            animation: fadeIn 2s ease;
+        }
+        .content h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .content a {
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: 0.3s ease;
+        }
+        .content a:hover {
+            background: white;
+            color: black;
+        }
+        .section {
+            padding: 60px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+        }
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            color: #f4d03f; /* Golden accent */
+            animation: fadeIn 1.5s ease-in;
+        }
+        .grid-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: start;
+            gap: 20px;
+            overflow-x:auto;
+            padding-bottom: 20px;
+        }
+        .grid-container::-webkit-scrollbar{
+            display: none;
+        }
+        .card {
+            width: 250px;
+            background:white;
+            border-radius: 10px;
+            overflow: hidden;
+            color: #333;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideIn 1.5s ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .card h3 {
+            margin: 15px 0;
+            font-size: 1.2rem;
+        }
+        .card p {
+            padding: 0 10px 15px;
+            font-size: 0.9rem;
+            text-align: justify;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+        /* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 15px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.navbar .logo a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.nav-links a:hover {
+    color: #f4d03f;
+}
+
+/* Dropdown Menu */
+.dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: black;
+            color: white;
+            padding: 5px 10px;
+            font-size: 16px;
+            border: 2px solid white;
+            cursor: pointer;
+            text-transform: capitalize;
+            border-radius: 20px;
+        }
+
+        .dropbtn:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .dropdown-content {
+            display: none;  /* Initially hide the dropdown */
+            position: absolute;
+            padding-top: 5px;
+            background-color: transparent;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 10px;
+            max-height: 150px;  /* Adjust this to show 3 or 4 items (approx. 40px per item) */
+            overflow-y: auto;  /* Enable vertical scrolling */
+        }
+
+        /* Hide the scrollbar but keep the scrolling functionality */
+        .dropdown-content::-webkit-scrollbar {
+            display: none;  /* Hide scrollbar in Webkit browsers */
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 20px 12px;
+            text-decoration: none;
+            display: block;
+            text-transform: capitalize;
+            border-bottom: 1px solid #ddd;
+            margin-top: 5px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .weather {
+            font-size: 0.9rem;
+            margin: 10px;
+            border-radius: 25px ;
+            padding: 10px; 
+            color:black;
+            display: inline-block;
+            background-color: #f0ececf5;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+/* /* Search Bar */
+/* .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-bar input {
+    width: 200px;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 2px solid white;
+    border-radius: 20px;
+    outline: none;
+    background-color: black;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.search-bar input::placeholder {
+    color: gray;
+}
+
+.search-bar input:focus {
+    border-color: #f4d03f;
+}
+
+.search-bar button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #f4d03f;
+    color: black;
+    border-radius: 20px;
+    cursor: pointer;
+    text-transform: capitalize;
+    transition: 0.3s ease;
+}
+.search-bar button:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}  */
+.popup-img {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-img img {
+            width: 80%;
+            height: auto;
+            max-width: 1000px;
+        }
+        .popup-img .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar <a href="pune.html">Districts</a> -->
+    <div class="navbar">
+        <div class="logo">MahaExplore</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#section districts">Attractions</a>
+            <a href="#section cuisine">Cuisine</a>
+            <div class="dropdown">
+                <button class="dropbtn">Districts</button>
+                    <div class="dropdown-content">
+                        <a href="pune.html">pune</a>
+                        <a href="mumbai.html">mumbai</a>
+                        <a href="sangli.html">sangli</a>
+                        <a href="solapur.html">solapur</a>
+                        <a href="Nagpur.html">nagpur</a>
+                        <a href="ahamednagar.html">ahamednagar</a>
+                        <a href="Bhandara.html">Bhandara</a>
+                        <a href="nandurbar.html">nandurbar</a>
+                        <a href="sindhudurga.html">sindhudurga</a>
+                        <a href="palghar.html">palghar</a>
+                        <a href="dhule.html">dhule</a>
+                        <a href="nashik.html">nashik</a>
+                        <a href="aurangabad.html">aurangabad</a>
+                        <a href="gadchiroli.html">gadchiroli</a>
+                        <a href="warda.html">warda</a>
+                        <a href="thane.html">thane</a>
+                        <a href="dhule.html">dhule</a>
+                        <a href="kolhapur.html">kolhapur</a>
+                        <a href="gondia.html">gondiae</a>
+                    </div>
+            </div>
+            <a href="contact.html">Contact</a>
+        
+        </div>
+    </div>
+         <!-- <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search Districts....">
+            <button id="searchBtn">search</button>
+        </div>  -->
+    
+
+    <!-- Hero Section -->
+    <div  id="home"class="banner">
+        <img src="https://theanamikapandey.com/wp-content/uploads/2024/08/e88116fb-b982-4d9d-affb-ed03860e0a4a-1024x1024.jpeg "alt="Mumbai"/>
+        <div class="content">
+            <h1>Welcome to Maharashtra</h1>
+            <p>Explore the beauty, history, and culture of Maharashtra.</p>
+            <a href="#">Discover More</a>
+        </div>
+    </div>
+
+    <!-- Top Attractions Section -->
+    <div id="section districts"  class="section districts">
+        <h2>Top Attractions</h2>
+        <div class="grid-container">
+            <div class="card"data-location="Mumbai">
+                <img src="https://theheritageart.com/wp-content/uploads/2022/11/gateway-of-india.jpeg"alt="Mumbai" />
+                <h3>Gateway Of India</h3>
+                <p>The city of dreams with iconic landmarks like Gateway of India.</p>
+                <div class="weather">Fetching weather...</div>
+            </div>
+            <div class="card"data-location="Panchgani">
+                <img src="https://content.r9cdn.net/rimg/dimg/49/89/e0fe2587-city-47025-1695ec59426.jpg?width=1366&height=768&xhint=1877&yhint=1489&crop=true" alt="Panchagni" />
+                <h3>Panchagni</h3>
+                <p>where the hills whisper secrets of nature's grandeur.</p>
+                <div class="weather">Fetching weather...</div>
+            </div>
+            <div class="card"data-location="Lavasa">
+                <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcSVRIS0Wn9zRliJqnQpr0QiSDipZLX4A3YIDsHcVtRRuiEtLNBIXJQa6l0WrOnZKir7AyUP6f4nvHKFbHFuV2btefUXtOVy7T5aKG1zxA" alt="lavasa" />
+                <h3>Lavasa</h3>
+                <p>where modern luxury meets nature's serenity.</p>
+                <div class="weather">Fetching weather...</div>
+            </div>
+            <div class="card"data-location="Lonavala">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/5c/53/fa/caption.jpg?w=500&h=400&s=1"alt=lonavala/>
+                <h3>Lonavala</h3>
+                <p>where waterfalls,hills,and serenity meet.</p>
+                <div class="weather">Fetching weather...</div>
+            </div>
+            <div class="card"data-location="Mahabaleshwar">
+                <img src="https://www.tripsavvy.com/thmb/4F2JnfDBKMKw288X7SFUqdunWUc=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/140515534-56a3c2c95f9b58b7d0d39d98.jpg" alt="mahabaleshwar" />
+                <h3>Mahabaleshwar</h3>
+                <p>feel the cool breeze and soak in the lush greenery of mahabaleshwar.</p>
+                <div class="weather">Fetching weather...</div>
+
+            </div>
+            <div class="card"data-location="Mumbai">
+                <img src="https://s7ap1.scene7.com/is/image/incredibleindia/juhu-beach-mumbai-maharashtra-1-musthead-hero?qlt=82&ts=1727355340209" alt="juhu beach" />
+                <h3>Juhu beach</h3>
+                <p>feel the ocean breeze and the rhythm of the waves at Juhu beach.</p>
+                <div class="weather">Fetching weather...</div>
+
+            </div>
+            <div class="card"data-location="Ratnagiri">
+                <img src="https://image.kesari.in/upload/MG/GANPATIPULE-BEACH-10_10_11zon_11zon.jpg"alt="ganpatipule"/>
+                <h3>Ganpatipule</h3>
+                <p>Discover the soul of kokan at the divine shores of Ganpatipule</p> 
+                <div class="weather">Fetching weather...</div>
+
+            </div>
+            <div class="card"data-location="Matheran">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipO3ROS_Zwu1TAFvEfoBeVP_vaAtTSs4LkBl8w7W=w675-h390-n-k-no" alt="Matheran" />
+                <h3>Matheran</h3>
+                <p>Matheran is a tranquil hill station with beautiful views.</p>
+                <div class="weather">Fetching weather...</div>
+
+            </div>
+        </div>
+    </div>
+    <div id="popup" class="popup-img">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <img id="popup-img" src="" alt="Enlarged image" />
+    </div>
+
+    <!-- Local Cuisine Section -->
+    <div id="section cuisine"class="section cuisine">
+        <h2>Local Cuisine</h2>
+        <div class="grid-container">
+            <div class="card">
+                <img src="https://www.ruchkar.in/cdn/shop/articles/iStock-1141418070.jpg?v=1583487296" alt="Vada Pav" />
+                <h3>Puran poli</h3>
+                <p>The iconic street food of Maharashtra, loved by all.</p>
+            </div>
+            <div class="card">
+                <img src="https://www.ohmyveg.co.uk/wp-content/uploads/2021/01/sabudana-khichdi-e1722865389647.jpg" alt="Puran Poli" />
+                <h3>khichadi</h3>
+                <p>A delicious traditional sweet dish of the region.</p>
+            </div>
+            <div class="card">
+                <img src="https://pipingpotcurry.com/wp-content/uploads/2019/04/Misal-Pav-Instant-Pot-1.jpg" alt="Puran Poli" />
+                <h3>Pav bhaji</h3>
+                <p>A delicious traditional sweet dish of the region.</p>
+            </div>
+            <div class="card">
+                <img src="https://c.ndtvimg.com/2023-09/irpk59vg_peanut-jam-modak_625x300_14_September_23.jpg" alt="Puran Poli" />
+                <h3>Modak</h3>
+                <p>A delicious traditional sweet dish of the region.</p>
+            </div>
+            <div class="card">
+                <img src="https://www.jiomart.com/images/product/original/rv37f4krsf/siddhakala-thalipith-bhajni-200-product-images-orv37f4krsf-p593464767-4-202208270231.jpg?im=Resize=(1000,1000)" alt="thalipeeth" />
+                <h3>Thalipeeth</h3>
+                <p>A delicious traditional sweet dish of the region.</p>
+            </div>
+            <div class="card">
+                <img src="https://i.ytimg.com/vi/9rEYpTuV_4U/maxresdefault.jpg" alt="Pithla bhikari" />
+                <h3>Pithla bhakri</h3>
+                <p>A delicious traditional sweet dish of the region.</p>
+            </div>
+            <div class="card">
+                <img src="https://shwetainthekitchen.com/wp-content/uploads/2022/07/Pav-bhaji.jpg" alt="Puran Poli" />
+                <h3>Pav bhaji</h3>
+                <p>A delicious traditional sweet dish of the region.</p>
+            </div>
+            <div class="card">
+                <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2022/09/kolhapuri-chicken-recipe.jpg" alt="Puran Poli" />
+                <h3>kolphapuri chicken</h3>
+                <p>A delicious traditional sweet dish of the region.</p>
+            </div>
+        </div>
+    </div>
+    <footer style="background-color: #333; color: #fff; padding: 20px 0; text-align: center;">
+                <div style="max-width: 1200px; margin: 0 auto; padding: 0 15px;">
+                  <!-- Footer Content -->
+                  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+                    <!-- About Section -->
+                    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                      <h3 style="margin-bottom: 10px;">About Maharashtra Tourism</h3>
+                      <p style="font-size: 14px; line-height: 1.6;">Explore the beauty, culture, and traditions of Maharashtra through our guide.</p>
+                    </div>
+              
+                    <!-- Quick Links -->
+                    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                      <h3 style="margin-bottom: 10px;">Quick Links</h3>
+                      <ul style="list-style: none; padding: 0; font-size: 14px; line-height: 1.6;">
+                        <li><a href="#home" style="color: #fff; text-decoration: none;">Home</a></li>
+                        <li><a href="#section districts" style="color: #fff; text-decoration: none;">Attractions</a></li>
+                        <li><a href="#section cuisine" style="color: #fff; text-decoration: none;">Cuisine</a></li>
+                        <li><a href="#contact" style="color: #fff; text-decoration: none;">Contact Us</a></li>
+                      </ul>
+                    </div>
+              
+                    <!-- Social Media -->
+                    <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                      <h3 style="margin-bottom: 10px;">Follow Us</h3>
+                      <div>
+                        <a href="#" style="color: #fff; text-decoration: none; margin-right: 10px;">Facebook</a>
+                        <a href="#" style="color: #fff; text-decoration: none; margin-right: 10px;">Twitter</a>
+                        <a href="#" style="color: #fff; text-decoration: none;">Instagram</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Copyright -->
+                  <p style="font-size: 12px; margin-top: 20px;">© 2024 Maharashtra Tourism. All rights reserved.</p>
+                </div>
+              </footer>
+
+
+<script>
+     const images = document.querySelectorAll('.card img');
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                const src = img.src;
+                document.getElementById('popup-img').src = src;
+                document.getElementById('popup').style.display = 'flex';
+            });
+        });
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+              // Define district URLs
+const districts = {
+    ahamednagar:"ahamednagar.html",
+    aurangabad:"auragabad.html",
+    Bhandara:"Bhandara.html",
+    Dhule:"dhule.html",
+    gadchiroli:"gadchiroli.html",
+    gondia:"gondia.html",
+    kolhapur:"kolhapur.html",
+    nandurbar:"nandurbar.html",
+    sangli:"sangli.html",
+    pune: "pune.html",
+    mumbai: "mumbai.html",
+    nashik: "nashik.html",
+    Nagpur: "nagpur.html",
+    Aurangabad: "aurangabad.html",
+    Palghar:"palghar.html",
+    Sindhudurga:"sindhudurga.html",
+    Solapur:"solapur.html",
+    Thane:"thane.html",
+    Warda:"warda.html",
+   dhule:"dhule.html",
+};
+
+// // Add search functionality
+//  document.getElementById("searchBtn").addEventListener("click", () => {
+//    const searchInput = document.getElementById("searchInput").value.toLowerCase();
+//     if (districts[searchInput]) {
+//          window.location.href = districts[searchInput];
+//     } else {
+//         alert("District not found. Please try again.");
+//      }
+//  });
+document.querySelector('.dropbtn').addEventListener('click', function(event) {
+            const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+            
+            // Optional: Close dropdown when clicking outside
+            window.addEventListener('click', function(e) {
+                if (!event.target.matches('.dropbtn') && !event.target.matches('.dropdown-content') && !event.target.matches('.dropdown-content a')) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        });
+        const apiKey = "8f833e2f0044bcd69b9bf91641915165";
+
+        // Function to fetch weather data
+        async function fetchWeather(location) {
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.main) {
+                    return {
+                        temperature: data.main.temp,
+                        description: data.weather[0].description,
+                    };
+                } else {
+                    return { error: "Location not found" };
+                }
+            } catch (error) {
+                console.error("Error fetching weather data:", error);
+                return { error: "Unable to fetch weather" };
+            }
+        }
+
+        // Function to update weather for each card
+        async function updateWeather() {
+            const cards = document.querySelectorAll(".card");
+            for (const card of cards) {
+                const location = card.getAttribute("data-location");
+                const weatherDiv = card.querySelector(".weather");
+                const weather = await fetchWeather(location);
+
+                if (weather.error) {
+                    weatherDiv.textContent = weather.error;
+                } else {
+                    weatherDiv.textContent =` ${weather.temperature}°C, ${weather.description}`;
+                }
+            }
+        }
+
+        // Call the updateWeather function when the page loads
+        document.addEventListener("DOMContentLoaded", updateWeather);
+</script>
+</body>
+</html>

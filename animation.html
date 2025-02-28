@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page with Animations</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            overflow-x: hidden;
+            background: black;
+            color: white;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: transparent;
+            /* background: rgb(0, 0, 0.2); */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            z-index: 10;
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            color: rgb(0, 255, 170);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('aaaa.jpeg') no-repeat center center;
+            background-size:cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        .hero img{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            animation: fadeIn 2s ease forwards;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            animation: fadeIn 3s ease forwards;
+        }
+
+        /* Sections */
+        .section {
+            padding: 50px 30px;
+            text-align: center;
+        }
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: slideIn 1s ease forwards;
+        }
+        .section p {
+            animation: slideIn 1.5s ease forwards;
+        }
+
+        /* District Section */
+        .districts {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .districts .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .districts .card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+            width: 250px;
+            color: white;
+            animation: slideIn 1s ease forwards;
+        }
+        .districts .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 15px rgba(0, 255, 170, 0.5);
+        }
+
+        /* Top Attractions Section */
+        .attractions .attraction-card {
+            display: inline-block;
+            width: 30%;
+            margin: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            animation: fadeIn 2s ease forwards;
+            opacity: 0;
+        }
+        .attractions .attraction-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Cuisine Section */
+        .cuisine .cuisine-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            animation: slideInFromLeft 1s ease forwards;
+            opacity: 0;
+        }
+        .cuisine .cuisine-item:hover {
+            background: rgba(0, 255, 170, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 255, 170, 0.5);
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideInFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">MahaExplore</div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#districts">Districts</a>
+            <a href="#attractions">Attractions</a>
+            <a href="#cuisine">Local Cuisine</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div>
+            <h1>Discover Maharashtra</h1>
+            <p>Explore the land of history, culture, and beauty.</p>
+        </div>
+    </section>
+
+    <!-- District Section -->
+    <div class="section districts" id="districts">
+        <h2>Popular Districts</h2>
+        <div class="grid-container">
+            <div class="card">
+                <img src="sssss.jpg" alt="mumbai"/>
+                <h3>mumbai</h3>
+                <p>the city of dream with iconic landmark</p>
+            </div>
+            <div class="card">
+                <img src="sssss.jpg" alt="mumbai"/>
+                <h3>mumbai</h3>
+                <p>the city of dream with iconic landmark</p>
+            </div>
+        </div>
+        </div>
+        <div class="card-container">
+            <div class="card">Mumbai</div>
+            <div class="card">Pune</div>
+            <div class="card">Nashik</div>
+        </div>
+    </section>
+
+    <!-- Top Attractions Section -->
+    <section class="section attractions" id="attractions">
+        <h2>Top Attractions</h2>
+        <div class="attraction-card">Gateway of India</div>
+        <div class="attraction-card">Marine Drive</div>
+        <div class="attraction-card">Ajanta Caves</div>
+    </section>
+
+    <!-- Cuisine Section -->
+    <section class="section cuisine" id="cuisine">
+        <h2>Local Cuisine</h2>
+        <div class="cuisine-item">Vada Pav</div>
+        <div class="cuisine-item">Puran Poli</div>
+        <div class="cuisine-item">Misal Pav</div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: contact@mahaexplore.com</p>
+    </section>
+</body>
+</html>

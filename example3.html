@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Attractions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            width: 250px;
+            margin: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .card h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .card p {
+            padding: 0 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .weather-info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #f4d03f; /* Golden color for contrast */
+            text-align: center;
+        }
+        .weather-temp {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .weather-desc {
+            font-size: 14px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <img src="https://theheritageart.com/wp-content/uploads/2022/11/gateway-of-india.jpeg" alt="Gateway of India">
+            <h3>Gateway Of India</h3>
+            <p>The city of dreams with iconic landmarks like Gateway of India.</p>
+            <div class="weather-info">
+                <p class="weather-temp" id="gateway-temp">Loading...</p>
+                <p class="weather-desc" id="gateway-desc">Weather info</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://www.traveltriangle.com/blog/wp-content/uploads/2020/12/Panchgani.jpg" alt="Panchgani">
+            <h3>Panchgani</h3>
+            <p>Enjoy hill views, strawberry farms, and cool weather.</p>
+            <div class="weather-info">
+                <p class="weather-temp" id="panchagni-temp">Loading...</p>
+                <p class="weather-desc" id="panchagni-desc">Weather info</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://media.istockphoto.com/id/1384527005/photo/lavasa-city-maharashtra-india.jpg?s=1024x1024&w=is&k=20&c=px1IrlODej9yQFw5cT6ZY12GVtOk_zPWaBww2qJ8pcE=" alt="Lavasa">
+            <h3>Lavasa</h3>
+            <p>A lakeside city known for its vibrant architecture.</p>
+            <div class="weather-info">
+                <p class="weather-temp" id="lavasa-temp">Loading...</p>
+                <p class="weather-desc" id="lavasa-desc">Weather info</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://static.indiatimes.in/thumb/msid-74645507,width-800,height-600,quality-80,imgsize-1052487,overlay-iti-viral/photo.jpg" alt="Lonavala">
+            <h3>Lonavala</h3>
+            <p>Famous for its scenic beauty and pleasant climate.</p>
+            <div class="weather-info">
+                <p class="weather-temp" id="lonavala-temp">Loading...</p>
+                <p class="weather-desc" id="lonavala-desc">Weather info</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://www.nativeplanet.com/travel-guide/media/2019/06/mahabaleshwar1-1560448620.jpg" alt="Mahabaleshwar">
+            <h3>Mahabaleshwar</h3>
+            <p>A popular hill station with strawberry farms and lush greenery.</p>
+            <div class="weather-info">
+                <p class="weather-temp" id="mahabaleshwar-temp">Loading...</p>
+                <p class="weather-desc" id="mahabaleshwar-desc">Weather info</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://www.mumbaiglossary.com/wp-content/uploads/2013/12/juhu-beach.jpg" alt="Juhu">
+            <h3>Juhu</h3>
+            <p>Relax on the beach and enjoy Mumbai's coastal vibe.</p>
+            <div class="weather-info">
+                <p class="weather-temp" id="juhu-temp">Loading...</p>
+                <p class="weather-desc" id="juhu-desc">Weather info</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://www.mumbailive.com/articles/2022/07/29/summer-beach-destinations-mumbai-ganpatipule.jpg" alt="Ganpatipule">
+            <h3>Ganpatipule</h3>
+            <p>A serene beach town with temples and nature trails.</p>
+            <div class="weather-info">
+                <p class="weather-temp" id="ganpatipule-temp">Loading...</p>
+                <p class="weather-desc" id="ganpatipule-desc">Weather info</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://cdn.s3waas.gov.in/s343f3c4062e795e309036ffae11fc78f2/uploads/2022/05/2022050587.jpg" alt="Sindhudurg">
+            <h3>Sindhudurg</h3>
+            <p>Explore forts, beaches, and marine life in Sindhudurg.</p>
+            <div class="weather-info">
+                <p class="weather-temp" id="sindhudurg-temp">Loading...</p>
+                <p class="weather-desc" id="sindhudurg-desc">Weather info</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // OpenWeatherMap API key
+        const apiKey = '8f833e2f0044bcd69b9bf91641915165';
+
+        // Coordinates for each attraction (Latitude, Longitude)
+        const attractions = {
+            "gateway": { lat: 18.9219, lon: 72.8347, elementId: "gateway-temp", descId: "gateway-desc" },
+            "panchagni": { lat: 17.9294, lon: 73.7712, elementId: "panchagni-temp", descId: "panchagni-desc" },
+            "lavasa": { lat: 18.4744, lon: 73.7456, elementId: "lavasa-temp", descId: "lavasa-desc" },
+            "lonavala": { lat: 18.7515, lon: 73.4091, elementId: "lonavala-temp", descId: "lonavala-desc" },
+            "mahabaleshwar": { lat: 17.9192, lon: 73.6445, elementId: "mahabaleshwar-temp", descId: "mahabaleshwar-desc" },
+            "juhu": { lat: 19.0937, lon: 72.8265, elementId: "juhu-temp", descId: "juhu-desc" },
+            "ganpatipule": { lat: 17.0401, lon: 73.5333, elementId: "ganpatipule-temp", descId: "ganpatipule-desc" },
+            "sindhudurg": { lat: 16.0295, lon: 73.6349, elementId: "sindhudurg-temp", descId: "sindhudurg-desc" }
+        };
+
+        // Function to fetch weather data
+        async function getWeather(lat, lon, tempElementId, descElementId) {
+            try {
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`);
+                const data = await response.json();
+                
+                // Update the temperature and weather description
+                document.getElementById(tempElementId).innerText = `${data.main.temp}°C`;
+                document.getElementById(descElementId).innerText = data.weather[0].description;
+            } catch (error) {
+                console.error("Error fetching weather data:", error);
+            }
+        }
+
+        // Fetch weather for each attraction
+        Object.values(attractions).forEach(attraction => {
+            getWeather(attraction.lat, attraction.lon, attraction.elementId, attraction.descId);
+        });
+    </script>
+</body>
+</html>

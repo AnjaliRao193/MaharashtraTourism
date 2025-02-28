@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            overflow-x: hidden;
+            background: black;
+            color: white;
+        }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            z-index: 10;
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            color: rgb(0, 255, 170);
+        }
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1533567005270-21fa622cc1ab') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            animation: fadeIn 2s ease forwards;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            animation: fadeIn 3s ease forwards;
+        }
+        /* District Section */
+        .section {
+            padding: 50px 30px;
+            text-align: center;
+        }
+        .districts {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .districts h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .districts .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .districts .card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+            width: 250px;
+            color: white;
+        }
+        .districts .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 15px rgba(0, 255, 170, 0.5);
+        }
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">MahaExplore</div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#districts">Districts</a>
+            <a href="#attractions">Attractions</a>
+            <a href="#cuisine">Local Cuisine</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div>
+            <h1>Discover Maharashtra</h1>
+            <p>Explore the land of history, culture, and beauty.</p>
+        </div>
+    </section>
+
+    <!-- District Section -->
+    <section class="section districts" id="districts">
+        <h2>Popular Districts</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3>Mumbai</h3>
+                <p>The city of dreams and vibrant culture.</p>
+            </div>
+            <div class="card">
+                <h3>Pune</h3>
+                <p>A hub of education and history.</p>
+            </div>
+            <div class="card">
+                <h3>Nashik</h3>
+                <p>Famous for vineyards and spiritual places.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attractions Section -->
+    <section class="section" id="attractions">
+        <h2>Top Attractions</h2>
+        <p>Content coming soon...</p>
+    </section>
+
+    <!-- Cuisine Section -->
+    <section class="section" id="cuisine">
+        <h2>Local Cuisine</h2>
+        <p>Content coming soon...</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: contact@mahaexplore.com</p>
+    </section>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MahaExplore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            overflow-x: hidden;
+            background-color: black;
+            color: white;
+        }
+
+        /* Flex container to arrange cards */
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        /* Card Styles */
+        .card {
+            position: relative;
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            color: #333;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex-shrink: 0;
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .card h3 {
+            margin: 15px 0;
+            font-size: 1.2rem;
+        }
+        .card p {
+            padding: 0 10px 15px;
+            font-size: 0.9rem;
+            text-align: justify;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Weather Styles */
+        .card .weather {
+            position: absolute;
+            bottom: 10px; /* Positions the weather info in the bottom-left corner */
+            left: 10px;
+            background-color:transparent; /* Semi-transparent background */
+            color: white;
+            /* padding:4px; */
+            line-height: 2px;
+            border-radius: 5px;
+            margin-bottom:100px ;
+            margin-left: 2px;
+            font-size: 14px;
+            text-align: left;
+            z-index: 10; /* Ensure it is on top of the image */
+        }
+        /* .card .weather i{
+            font-size:15px; */
+        
+        .card .temperature {
+            font-weight: bold;
+        }
+        .card .weather-description {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <!-- Sample Cards -->
+        <div class="card">
+            <img src="https://theheritageart.com/wp-content/uploads/2022/11/gateway-of-india.jpeg" alt="Gateway Of India" />
+            <h3>Gateway Of India</h3>
+            <p>The city of dreams with iconic landmarks like Gateway of India.</p>
+            <div class="weather">
+                <p class="temperature">Loading...</p>
+                <p class="weather-description">Loading...</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://example.com/other-image.jpg" alt="Another Landmark" />
+            <h3>Another Landmark</h3>
+            <p>Discover the beauty and culture of this iconic place.</p>
+            <div class="weather">
+                <p class="temperature">Loading...</p>
+                <p class="weather-description">Loading...</p>
+            </div>
+        </div>
+
+        <!-- Add more cards as needed -->
+    </div>
+
+    <script>
+        // Function to fetch weather and update the card
+        async function getWeather(city, cardElement) {
+            const apiKey = '8f833e2f0044bcd69b9bf91641915165'; // Your OpenWeatherMap API key
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.cod === 200) {
+                    // Extract temperature and weather description
+                    const temperature = data.main.temp;
+                    const description = data.weather[0].description;
+
+                    // Update the weather section in the card
+                    const temperatureElement = cardElement.querySelector('.temperature');
+                    const descriptionElement = cardElement.querySelector('.weather-description');
+
+                    temperatureElement.textContent = `${temperature}°C`;
+                    descriptionElement.textContent = description.charAt(0).toUpperCase() + description.slice(1); // Capitalize first letter
+                } else {
+                    console.error('Error fetching weather data:', data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
+
+        // Call getWeather for each card with the specific city
+        document.querySelectorAll('.card').forEach((card) => {
+            const city = 'mahabaleshwar'; // You can change this to any other city
+            getWeather(city, card);
+        });
+    </script>
+</body>
+</html>
